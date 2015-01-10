@@ -2,17 +2,22 @@ package com.xda.one.ui.widget;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.Gravity;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 public class SlidingTabLayout extends TabLayout {
 
-    private static final int TAB_VIEW_TEXT_SIZE_SP = 14;
+    private static final int TAB_VIEW_TEXT_SIZE_SP = 12;
 
     private static final int TAB_VIEW_PADDING_DIPS = 16;
+
+    private static final int NUM_OF_TABS = 4;
 
     public SlidingTabLayout(final Context context) {
         super(context);
@@ -35,6 +40,13 @@ public class SlidingTabLayout extends TabLayout {
     @Override
     protected TextView createDefaultTabView(Context context) {
         TextView textView = new TextView(context);
+
+        // this devides the textviews evenly across the screen
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        textView.setWidth(size.x / NUM_OF_TABS);
         textView.setGravity(Gravity.CENTER);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TAB_VIEW_TEXT_SIZE_SP);
         textView.setTypeface(Typeface.DEFAULT_BOLD);
