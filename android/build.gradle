@@ -47,7 +47,7 @@ android {
             ext.enableCrashlytics = false
         }
         full {
-            ext.enableCrashlytics = true
+            ext.enableCrashlytics = false
         }
     }
 }
